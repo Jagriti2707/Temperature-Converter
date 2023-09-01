@@ -1,0 +1,235 @@
+                                      Full code of Temperature
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Converter</title>
+    <!--<link rel="stylesheet" href="style.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" 
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+body{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    min-height: 100vh;
+    
+  
+    background-size: cover;
+}
+#videobcg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100% !important;
+    max-height: 100% !important;
+    z-index: -1000;
+    overflow: hidden;
+    object-fit: fill;
+    -webkit-filter: blur(15px);
+    -moz-filter: blur(15px);
+    -o-filter: blur(15px);
+    -ms-filter: blur(15px);
+    filter: blur(15px);
+}
+
+
+.container {
+ 
+  max-width: 500px;
+    background:rgb(216, 6, 239);
+    border-radius: 8px;
+    box-shadow: 0px 0px 15px 3px rgba(241, 4, 4, 0.4);
+    font-family:cursive;
+    padding:20px;
+}
+
+
+.title{
+    display:flex;
+    justify-content:center;
+    align-items: center;
+    flex-wrap:wrap-reverse;
+    gap:10px;
+
+}
+
+.Temperature-icon{
+    font-size:45px;
+    color:rgb(8, 8, 240);
+}
+h1{
+    color:rgb(26, 11, 239);
+    letter-spacing:1.2px;
+    font-size:30px;
+
+}
+
+
+#celcius, #fahrenheit, #kelvin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+}
+input{
+    flex:5;
+    height:60px;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    border: none;
+    outline:none;
+    border-radius: 8px 0 0 8px;
+    padding: 0 10px;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+}
+
+
+/*for mozilla*/
+input{
+    -moz-appearance: textfield;
+}
+.icon{
+    flex:1;
+    height: 60px;
+    line-height: 60px;
+    padding: 0 5px;
+    text-align:center;
+    font-size:30px;
+    background:rgb(245, 5, 5);
+    color:#fff;
+    border-radius: 0 8px 8px 0;
+
+}
+
+.button{
+    margin-top: 25px;
+    text-align: center;
+}
+
+.button button{
+    border:none;
+    outline: none;
+    padding:10px 30px;
+    font-size:20px;
+    font-weight: 600;
+    border-radius: 3px;
+    cursor:pointer;
+    transition: 0.3s;
+
+}
+
+.button button:hover{
+    background:rgb(244, 3, 3);
+    color:white;
+}
+
+</style>
+
+<body>
+    
+    <video id="videobcg" preload="auto" autoplay="true" loop="loop"  muted="muted" volume="0">
+        <source src='/vid.mp4'>
+        </video>
+        
+    <div class="container">
+        <div class="title">
+            <h1>Temperature Converter</h1>
+            <span class="Temperature-icon">
+            <i class="fa-solid fa-temperature-high"></i>
+        </span>
+        </div>
+    
+    <div id="celcius">
+        <input type="number" name="" placeholder="Celcius">
+        <span class="icon">&#8451</span>
+    </div>
+    <div id="fahrenheit">
+        <input type="number" name="" placeholder="Fahrenheit">
+        <span class="icon">&#8457</span>
+    </div>
+    <div id="kelvin">
+        <input type="number" name="" placeholder="Kelvin">
+        <span class="icon">&#8490</span>
+    </div>
+
+
+    <div class="button">
+        <button> Clear</button>
+    </div>
+</div>
+<script>
+    let celciusInput=document.querySelector('#celcius > input')
+    let fahrenheitInput=document.querySelector('#fahrenheit > input')
+    let kelvinInput=document.querySelector('#kelvin > input')
+
+    let btn=document.querySelector('.button button')
+    function roundnumber(number){
+        return Math.round(number*100)/100
+    }
+/*celcius to fahrenheit and kelvin*/
+    celciusInput.addEventListener('input',function(){
+        let ctemp=parseFloat(celciusInput.value)
+        let ftemp=(ctemp*(9/5))+32
+        let ktemp=ctemp+273.15
+        
+
+
+        fahrenheitInput.value=roundnumber(ftemp)
+        kelvinInput.value=roundnumber(ktemp)
+        
+        })
+
+/*fahrenheit to celcius  and kelvin*/
+
+        fahrenheitInput.addEventListener('input',function(){
+        let ftemp=parseFloat(fahrenheitInput.value)
+        let ctemp=(ftemp-32)*(5/9)
+        let ktemp=(ftemp-32)* (5/9) + 273.15
+        
+
+
+        celciusInput.value=roundnumber(ctemp)
+        kelvinInput.value=roundnumber(ktemp)
+        
+        })
+
+
+
+        /*kelvin to fahrenheit and celcius*/
+       kelvinInput.addEventListener('input',function(){
+        let ktemp=parseFloat(kelvinInput.value)
+        let ctemp=ktemp-273.15
+        let ftemp=(ktemp-273.15) * (9/5) + 32
+        
+
+
+        celciusInput.value=roundnumber(ctemp)
+       fahrenheitInput.value=roundnumber(ftemp)
+        
+        })
+
+       btn.addEventListener('click', ()=>{
+            celciusInput.value=""
+            fahrenheitInput.value=""
+            kelvinInput.value=""
+        })
+</script>
+
+    
+</body>
+</html>
